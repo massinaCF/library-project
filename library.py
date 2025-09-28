@@ -20,6 +20,7 @@ class Library(object):
     def __init__(self):
         self.books = {}
 
+
     def get_title(self, book):
         string = book.get_info()
         string = string.split("|")
@@ -29,9 +30,15 @@ class Library(object):
     def add_book(self, book):
         self.books[book.title] = book
 
+
     def list_books(self):
-        for title, book in self.books.items():
-            print(book.get_info())
+        if not self.books:
+            return "No books available"
+        book_infos = []
+        for book in self.books.values():
+            book_infos.append(book.get_info())
+        result = "\n".join(book_infos)
+        return result
 
     def remove_book(self, title):
         if title in self.books.keys():
@@ -83,9 +90,10 @@ second_book = EBook("Moby Dick", "Philip K.", 5, 10)
 library = Library()
 library.add_book(first_book)
 library.add_book(second_book)
-library.list_books()
+print(library.list_books())
 library.remove_book("Ion Creanga")
-library.list_books()
+print(library.list_books())
+
 alex = User("Alex")
 alex.borrow_book(library, "Amintiri din copilarie")
 alex.borrow_book(library, "Moby Dick")
