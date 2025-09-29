@@ -43,9 +43,9 @@ class Library(object):
     def remove_book(self, title):
         if title in self.books.keys():
             del self.books[title]
-            print("Book %s removed" % title)
+            return("Book %s removed" % title)
         else:
-            print("Book %s not found" % title)
+            return("Book %s not found" % title)
 
 class User(object):
     def __init__(self, name):
