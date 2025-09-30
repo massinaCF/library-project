@@ -60,9 +60,9 @@ class User(object):
                 self.borrowed_books[title] += 1
             else:
                 self.borrowed_books[title] = 1
-            print(self.name + " borrowed " + title)
+            return self.name + " borrowed " + title
         else:
-            print("Sorry %s not available." % title)
+            return "Sorry %s not available." % title
 
     def return_book(self, library, title):
         if title in self.borrowed_books.keys():
@@ -70,16 +70,16 @@ class User(object):
             library.books[title].copies += 1
             if self.borrowed_books[title] == 0:
                 del self.borrowed_books[title]
-            print(self.name + " returned " + title)
+            return self.name + " returned " + title
         else:
-            print(self.name + " doesn't have " + title)
+            return self.name + " doesn't have " + title
 
     def list_borrowed(self):
         if not self.borrowed_books:
-            print("No books borrowed")
+            return "No books borrowed"
         else:
             for title, count in self.borrowed_books.items():
-                print(title + " borrowed in " + str(count) + " copies")
+                return title + " borrowed in " + str(count) + " copies"
 
 
 
