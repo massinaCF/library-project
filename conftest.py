@@ -16,3 +16,10 @@ def library_with_books():
     yield lib
 
     lib.books.clear()
+
+@pytest.fixture
+def user_without_books():
+    alex = User("Alex")
+    yield alex
+
+    alex.borrowed_books.clear()

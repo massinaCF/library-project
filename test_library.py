@@ -35,4 +35,16 @@ def test_library_delete_book(library_with_books, title, expected, should_exist):
         assert "Amintiri din copilarie" in library_with_books.books
         assert "Moby Dick" in library_with_books.books
 
+@pytest.mark.P2
+def test_user_no_books_borrowed(user_without_books):
+    output = user_without_books.list_borrowed()
+    assert output == "No books borrowed"
 
+
+@pytest.mark.P1
+def test_user_borrow_book(user_without_books, library_with_books):
+    initial_book_copies = library_with_books.books["Amintiri din copilarie"].copies
+    output = user_without_books.borrow_book(library_with_books, "Amintiri din copilarie")
+    assert output == "Alex borrowed Amintiri din copilarie"
+    assert user_without_books.borrowed_books["Amintiri din copilarie"] == 1
+    assert library_with_books.books["Amintiri din copilarie"].copies == initial_book_copies - 1
